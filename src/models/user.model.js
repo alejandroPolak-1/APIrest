@@ -14,6 +14,10 @@ UserSchema.methods.toJSON = function(){
     return user;
 }
 
+UserSchema.methods.comparePasswords = function(password){
+    return compareSync(password, this.password)
+}
+
 UserSchema.pre("save", async function(next) {
 	const user = this;
 
