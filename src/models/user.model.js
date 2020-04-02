@@ -1,0 +1,24 @@
+const mongoose = require("mongoose");
+const { Schema } = mongoose;
+const { compareSync, hashSync, genSaltSync } = require("bcryptjs");
+
+const UserSchema = new Schema({
+	name: { type: String, require: true },
+	username: { type: String, required: true },
+	password: { type: String, required: true }
+});
+
+UserSchema.pre("save", async function(next) {
+	const user = this;
+
+	if (!user.isModified("password")) {
+		return next();
+	}
+
+	const salt = genSaltSync(10);
+	const hashedPassword = hashSync(user.password, salt);
+	user.password = hashedPassword;
+	next();
+});
+
+module.exports = mongoose.model("user", UserSchema);
