@@ -12,5 +12,15 @@ const IdeaSchema = new Schema({
 		ref: "user",
 		required: true,
 		autopopulate: true
-	}
+	},
+	comments: [
+		{
+			type: Schema.Types.ObjectId,
+			ref: "comment",
+			required: true,
+			autopopulate: true
+		}
+	]
 });
+
+module.exports = mongoose.model("idea", IdeaSchema);
