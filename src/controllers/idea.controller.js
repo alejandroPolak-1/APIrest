@@ -8,7 +8,7 @@ class IdeaController {
 	async get(req, res) {
 		const { ideaId } = req.params;
 		const idea = await _ideaService.get(ideaId);
-		return req.send(idea);
+		return res.send(idea);
 	}
 
 	async getAll(req, res) {
@@ -23,7 +23,7 @@ class IdeaController {
 		return res.send(updateIdea);
 	}
 
-	async createIdea(req, res) {
+	async create(req, res) {
 		const { body } = req;
 		const createIdea = await _ideaService.create(body);
 		return res.status(201).send(createIdea);
