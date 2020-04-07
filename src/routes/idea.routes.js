@@ -5,7 +5,7 @@ module.exports = function({ IdeaController }) {
 
 	router.get("", IdeaController.getAll);
 	router.get("/:ideaId", IdeaController.get);
-	router.get("/:ideaId/all", IdeaController.getUserIdea);
+	router.get("/:ideaId/all", IdeaController.getUserIdeas);
 	router.post("", IdeaController.create);
 	router.post("/:ideaId/upvote", IdeaController.upvoteIdea);
 	router.post("/:ideaId/downvote", IdeaController.downvoteIdea);
