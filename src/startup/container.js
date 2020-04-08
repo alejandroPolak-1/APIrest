@@ -18,7 +18,8 @@ const {
 	HomeController,
 	UserController,
 	IdeaController,
-	CommentController
+	CommentController,
+	AuthController
 } = require("../controllers");
 
 //routes
@@ -59,6 +60,7 @@ container
 		HomeController: asClass(HomeController.bind(HomeController)).singleton(),
 		UserController: asClass(UserController.bind(UserController)).singleton(),
 		IdeaController: asClass(IdeaController.bind(IdeaController)).singleton(),
+		AuthController: asClass(AuthController.bind(AuthController)).singleton(),
 		CommentController: asClass(
 			CommentController.bind(CommentController)
 		).singleton()
