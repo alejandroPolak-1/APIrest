@@ -24,6 +24,7 @@ module.exports = function({
 	apiRoutes.use("/user", UserRoutes);
 	apiRoutes.use("/idea", IdeaRoutes);
 	apiRoutes.use("/comment", CommentRoutes);
+	apiRoutes.use("/auth", CommentRoutes);
 
 	router.use("/v1/api", apiRoutes);
 
