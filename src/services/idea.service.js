@@ -2,64 +2,65 @@ const BaseService = require("./base.service");
 let _ideaRepository = null;
 
 class IdeaService extends BaseService {
-	constructor({ IdeaRepository }) {
-		super(IdeaRepository);
-		_ideaRepository: IdeaRepository;
-	}
+  constructor({ IdeaRepository }) {
+    super(IdeaRepository);
+    _ideaRepository = IdeaRepository;
+  }
 
-	async getUserIdeas(Author) {
-		if (!author) {
-			const error = new Error();
-			error.status = 400;
-			error.message = "userId must be sent";
-			throw error;
-		}
+  async getUserIdeas(author) {
+    if (!author) {
+      const error = new Error();
+      error.status = 400;
+      error.message = "userId must be sent";
+      throw error;
+    }
 
-		return await _ideaRepository.getUserIdeas(author);
-	}
+    return await _ideaRepository.getUserIdeas(author);
+  }
 
-	async upvoteIdea(ideaId) {
-		if (!ideaId) {
-			const error = new Error();
-			error.status = 400;
-			error.message = "ideaId must be sent";
-			throw error;
-		}
+  async upvoteIdea(ideaId) {
+    if (!ideaId) {
+      const error = new Error();
+      error.status = 400;
+      error.message = "ideaId must be sent";
+      throw error;
+    }
 
-		const idea = await _ideaRepository.get(ideaId);
-		if (!idea) {
-			const error = new Error();
-			error.status = 404;
-			error.message = "idea does not exist";
-			throw error;
-		}
+    const idea = await _ideaRepository.get(ideaId);
 
-		idea.upvotes.push(true);
+    if (!idea) {
+      const error = new Error();
+      error.status = 404;
+      error.message = "idea does not exist";
+      throw error;
+    }
 
-		return await _ideaRepository.update(ideaId, { upvotes: idea.upvotes });
-	}
+    idea.upvotes.push(true);
 
-	async downvoteIdea(ideaId) {
-		if (!ideaId) {
-			const error = new Error();
-			error.status = 400;
-			error.message = "ideaId must be sent";
-			throw error;
-		}
+    return await _ideaRepository.update(ideaId, { upvotes: idea.upvotes });
+  }
 
-		const idea = await _ideaRepository.get(ideaId);
-		if (!idea) {
-			const error = new Error();
-			error.status = 404;
-			error.message = "idea does not exist";
-			throw error;
-		}
+  async downvoteIdea(ideaId) {
+    if (!ideaId) {
+      const error = new Error();
+      error.status = 400;
+      error.message = "ideaId must be sent";
+      throw error;
+    }
 
-		idea.downvotes.push(true);
+    const idea = await _ideaRepository.get(ideaId);
 
-		return await _ideaRepository.update(ideaId, { downvotes: idea.downvotes });
-	}
+    if (!idea) {
+      const error = new Error();
+      error.status = 404;
+      error.message = "idea does not exist";
+      throw error;
+    }
+
+    idea.downvotes.push(true);
+
+    return await _ideaRepository.update(ideaId, { downvotes: idea.downvotes });
+  }
 }
 
 module.exports = IdeaService;
-

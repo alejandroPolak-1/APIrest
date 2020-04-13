@@ -1,5 +1,4 @@
 let _ideaService = null;
-
 class IdeaController {
 	constructor({ IdeaService }) {
 		_ideaService = IdeaService;
@@ -12,9 +11,15 @@ class IdeaController {
 	}
 
 	async getAll(req, res) {
-		const { pageSize, pageNum } = req;
+		const { pageSize, pageNum } = req.query;
 		const ideas = await _ideaService.getAll(pageSize, pageNum);
 		return res.send(ideas);
+	}
+
+	async create(req, res) {
+		const { body } = req;
+		const createIdea = await _ideaService.create(body);
+		return res.status(201).send(createIdea);
 	}
 
 	async update(req, res) {
@@ -22,12 +27,6 @@ class IdeaController {
 		const { ideaId } = req.params;
 		const updateIdea = await _ideaService.update(ideaId, body);
 		return res.send(updateIdea);
-	}
-
-	async create(req, res) {
-		const { body } = req;
-		const createIdea = await _ideaService.create(body);
-		return res.status(201).send(createIdea);
 	}
 
 	async delete(req, res) {
