@@ -6,7 +6,7 @@ module.exports = function({ IdeaController }) {
 
 	router.get("", [ParseIntMiddleware, AuthMiddleware], IdeaController.getAll);
 	router.get("/:ideaId", IdeaController.get);
-	router.get("/:ideaId/all", IdeaController.getUserIdeas);
+	router.get("/:userId/all", IdeaController.getUserIdeas);
 	router.post("", IdeaController.create);
 	router.post("/:ideaId/upvote", AuthMiddleware, IdeaController.upvoteIdea);
 	router.post("/:ideaId/downvote", AuthMiddleware, IdeaController.downvoteIdea);
